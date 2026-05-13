@@ -23,10 +23,45 @@ public class TaskManager {
                 case 3:
                     updateTaskStatus(tasks, scanner);
                     break;
+                case 4:
+                    removeTask(tasks, scanner);
+                    break;
 
             }
 
         } while (choice != 5);
+
+    }
+
+    private static void removeTask(ArrayList<Task> tasks, Scanner scanner) {
+        int choice;
+
+        if (tasks.isEmpty()) {
+            System.out.println("There are no task.");
+            return;
+        } else {
+            for (int i = 0; i < tasks.size(); i ++) {
+                System.out.println(i + 1 + ". " + tasks.get(i).getTask());
+            }
+
+            System.out.println("Enter corresponding task number that you would like to remove");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Enter numerical values only");
+                System.out.print("Enter corresponding task number that you would like to mark complete: ");
+            }
+
+            choice = scanner.nextInt();
+
+            while (choice < 1 || choice > tasks.size()) {
+                System.out.println("Enter value within range of task");
+                System.out.print("Enter corresponding task number that you would like to remove: ");
+                choice = scanner.nextInt();
+            }
+
+            tasks.remove(choice - 1);
+
+        }
 
     }
 
